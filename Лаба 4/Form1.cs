@@ -16,42 +16,84 @@ namespace Лаба_4
         {
             InitializeComponent();
         }
-		Point Locmouse;
-		int x_loc;
-		int y_loc;
-
-		private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-        public class Circle
+		Storage st = new Storage(100);
+		private void data_Paint(object sender, PaintEventArgs e)
+		{
+			for (int i = 0; i < st.count; ++i)
+			{
+				st.get(i).Draw_circle(e);
+			}
+		}
+		bool q;
+		private void data_MouseClick(object sender, MouseEventArgs e)
+		{
+			if (checkB.Checked == true)
+			{
+				st.add(new Circle(e));
+				data.Invalidate();
+			}
+			else
+            {
+				int x = 1;
+				for(int i=st.count-1;i>=0;--i)
+                {
+					if (q != true)
+						st.get(i).SetSelected(false);
+					if(st.get(i).Boom(e)&&x==1)
+                    {
+						x = 0;
+						st.get(i).SetSelected(true);
+                    }
+                }
+				data.Invalidate();
+            }
+		}
+		public class Circle
         {
             public int x;
             public int y;
             public int rad;
-            Circle()
+			public bool selected;
+            public Circle(MouseEventArgs e)
             {
-                x = 0;
-                y = 0;
-                rad = 10;
-            }
-            public Circle(int _x,int _y)
-            {
-                x = _x;
-                y = _y;
+                x = e.X;
+                y = e.Y;
             }
             public Circle(Circle a)
             {
                 x = a.x;
                 y = a.y;
             }
+			public  bool Select(bool x)
+            {
+				return selected;
+            }
+			public void SetSelected(bool x)
+            {
+				selected = x;
+            }
+			public void Draw_circle(PaintEventArgs e)
+            {
+				if (selected)
+					e.Graphics.DrawEllipse(new Pen(Brushes.Blue,3), x - 50, y - 50, 100, 100);
+				else
+					e.Graphics.DrawEllipse(new Pen(Brushes.Red, 3), x - 50, y - 50, 100, 100);
+			}
+			public  bool Boom(MouseEventArgs e)
+            {
+				if (Math.Sqrt(Math.Pow(e.X-x,2)+Math.Pow(e.Y-y,2))<=50)
+                {
+					return true;
+                }
+				return false;
+            }
         }
         public class Storage
         {
 			public Circle[] storage_circle;
-			int count;
+			public int count;
 			int size;
-			Storage(int _size)
+			public Storage(int _size)
 			{
 				count = 0;
 				size = _size;
@@ -60,43 +102,16 @@ namespace Лаба_4
 				{
 					storage_circle[i] = null;
 				}
-				//cout <<"Хранилище создано" << endl;
 			}
-			public void add(Circle a, int i)
+			public void add(Circle a)
 			{
-				if ((i < size) && (size != count))
-				{
-					if (storage_circle[i] == null)
-					{
-						//printf("В хранилище добавлен элемент в ячейку %d\n",i);
-						storage_circle[i] = a;
-						count += 1;
-					}
-					else
-					{
-						//printf(" В этой ячейке уже есть элемент,идем дальше\n");
-						int j = i;
-						while ((storage_circle[j] != null) && (j < size))
-						{
-							++j;
-						}
-						if (storage_circle[j] == null)
-						{
-							storage_circle[j] = a;
-							count++;
-							//printf("Добавлен элемент в ячейку%d\n", j);
-						}
-						else
-						{
-							expansion(a, j);
-						}
-					}
-				}
-				else
-				{
-					expansion(a, i);
-				}
+				storage_circle[count] = a;
+				count++; ;
 			}
+			public Circle get(int x)
+            {
+				return storage_circle[x];
+            }
 			public void expansion(Circle a, int new_size)
 			{
 				//printf("Превышен размер хранилища,увеличиваем его\n");
@@ -121,36 +136,9 @@ namespace Лаба_4
 				{
 					storage_circle[i] = null;
 					count--;
-					//printf( "Элемент удален из ячейки %d\n",i);
 				}
-				/*else
-					cout << "Невозможно удалить,пуста ячейка под номером " <<i<< endl;*/
 			}
-			public int Whatcount()
-			{
-				return count;
-			}
-			public int Whatsize()
-			{
-				return size;
-			}
-		}
-		private void Form1_MouseMove(object sender, MouseEventArgs e)
-		{
-		}
-		bool flag = false;
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-			if (flag)
-				e.Graphics.DrawEllipse(new Pen(Brushes.Red, 3), x_loc, y_loc, 100, 100);
-		}
 
-        private void Form1_MouseClick(object sender, MouseEventArgs e)
-        {
-			 flag = true;
-			 x_loc = e.Location.X;
-			 y_loc = e.Location.Y;
-			 Invalidate();
 		}
 
     }
