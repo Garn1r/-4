@@ -16,7 +16,7 @@ namespace Лаба_4
         {
             InitializeComponent();
         }
-		Storage st = new Storage(100);
+		Storage st = new Storage(500);
 		private void data_Paint(object sender, PaintEventArgs e)
 		{
 			for (int i = 0; i < st.count; ++i)
@@ -39,7 +39,7 @@ namespace Лаба_4
                 {
 					if (q != true)
 						st.get(i).SetSelected(false);
-					if(st.get(i).Boom(e)&&x==1)
+					if(st.get(i).Boundary(e)&&x==1)
                     {
 						x = 0;
 						st.get(i).SetSelected(true);
@@ -48,38 +48,53 @@ namespace Лаба_4
 				data.Invalidate();
             }
 		}
+		private void data_KeyDown(object sender, KeyEventArgs e)
+		{
+			q = e.Control;
+			if (e.KeyCode.ToString() == "Delete")
+			{
+				int w = st.count;
+				for (int i = 0, k = 0; i < w; k++, i++)
+				{
+					if (st.get(k).Select())
+					{
+						st.remove(k);
+						--k;
+					}
+				}
+				data.Invalidate();
+			}
+		}
+		private void data_KeyUp(object sender, KeyEventArgs e)
+		{
+			q = e.Control;
+		}
 		public class Circle
         {
             public int x;
             public int y;
-            public int rad;
 			public bool selected;
             public Circle(MouseEventArgs e)
             {
                 x = e.X;
                 y = e.Y;
             }
-            public Circle(Circle a)
-            {
-                x = a.x;
-                y = a.y;
-            }
-			public  bool Select(bool x)
+			public  bool Select()
             {
 				return selected;
             }
-			public void SetSelected(bool x)
+			public void SetSelected(bool new_select)
             {
-				selected = x;
+				selected = new_select;
             }
 			public void Draw_circle(PaintEventArgs e)
             {
 				if (selected)
-					e.Graphics.DrawEllipse(new Pen(Brushes.Blue,3), x - 50, y - 50, 100, 100);
+					e.Graphics.DrawEllipse(new Pen(Brushes.Blue,3), x-50 , y-50 , 100, 100);
 				else
-					e.Graphics.DrawEllipse(new Pen(Brushes.Red, 3), x - 50, y - 50, 100, 100);
+					e.Graphics.DrawEllipse(new Pen(Brushes.Green, 3), x-50 , y-50 , 100, 100);
 			}
-			public  bool Boom(MouseEventArgs e)
+			public  bool Boundary(MouseEventArgs e)
             {
 				if (Math.Sqrt(Math.Pow(e.X-x,2)+Math.Pow(e.Y-y,2))<=50)
                 {
@@ -98,10 +113,6 @@ namespace Лаба_4
 				count = 0;
 				size = _size;
 				storage_circle = new Circle[size];
-				for (int i = 0; i < size; i++)
-				{
-					storage_circle[i] = null;
-				}
 			}
 			public void add(Circle a)
 			{
@@ -130,14 +141,18 @@ namespace Лаба_4
 				size = size + new_size;
 				//printf("Хранилище увеличено на %d и добавлен элемент в ячейку %d\n", new_size,new_size);
 			}
-			public void remove(int i)
+			public void remove(int x)
 			{
-				if ((i <= size) && (storage_circle[i] != null) && (count > 0))
+				for(int i=x;i<count-1;++i)
 				{
-					storage_circle[i] = null;
-					count--;
+					storage_circle[i] =storage_circle[i+1] ;
 				}
+				count--;
 			}
+			public int numbers()
+            {
+				return count;
+            }
 
 		}
 

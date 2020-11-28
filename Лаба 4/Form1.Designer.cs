@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.data = new System.Windows.Forms.DataGridView();
             this.checkB = new System.Windows.Forms.CheckBox();
+            this.data = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.data)).BeginInit();
             this.SuspendLayout();
@@ -44,6 +44,16 @@
             this.panel1.Size = new System.Drawing.Size(440, 35);
             this.panel1.TabIndex = 0;
             // 
+            // checkB
+            // 
+            this.checkB.AutoSize = true;
+            this.checkB.Location = new System.Drawing.Point(134, 4);
+            this.checkB.Name = "checkB";
+            this.checkB.Size = new System.Drawing.Size(72, 21);
+            this.checkB.TabIndex = 0;
+            this.checkB.Text = "Create";
+            this.checkB.UseVisualStyleBackColor = true;
+            // 
             // data
             // 
             this.data.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
@@ -55,17 +65,9 @@
             this.data.Size = new System.Drawing.Size(910, 599);
             this.data.TabIndex = 1;
             this.data.Paint += new System.Windows.Forms.PaintEventHandler(this.data_Paint);
+            this.data.KeyDown += new System.Windows.Forms.KeyEventHandler(this.data_KeyDown);
+            this.data.KeyUp += new System.Windows.Forms.KeyEventHandler(this.data_KeyUp);
             this.data.MouseClick += new System.Windows.Forms.MouseEventHandler(this.data_MouseClick);
-            // 
-            // checkB
-            // 
-            this.checkB.AutoSize = true;
-            this.checkB.Location = new System.Drawing.Point(134, 4);
-            this.checkB.Name = "checkB";
-            this.checkB.Size = new System.Drawing.Size(72, 21);
-            this.checkB.TabIndex = 0;
-            this.checkB.Text = "Create";
-            this.checkB.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -87,8 +89,8 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridView data;
         private System.Windows.Forms.CheckBox checkB;
+        private System.Windows.Forms.DataGridView data;
     }
 }
 
