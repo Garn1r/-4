@@ -8,29 +8,30 @@ namespace Лаба_4
 {
    public partial class Storage
     {
-		public Circle[] storage_circle;
+		public Shape[] storage_;
 		public int count;
 		int size;
 		public Storage(int _size)
 		{
 			count = 0;
 			size = _size;
-			storage_circle = new Circle[size];
+			storage_ = new Shape[size];
 		}
-		public void add(Circle a)
+		public void add(Shape a)
 		{
-			storage_circle[count] = a;
+			storage_[count] = a;
 			count++; ;
 		}
-		public Circle get(int x)
+		public Shape get(int x)
 		{
-			return storage_circle[x];
+			return storage_[x];
 		}
+
 		public void remove(int x)
 		{
 			for (int i = x; i < count - 1; ++i)
 			{
-				storage_circle[i] = storage_circle[i + 1];
+				storage_[i] = storage_[i + 1];
 			}
 			count--;
 		}

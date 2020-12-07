@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace Лаба_4
 {
-    public partial class Circle
+    public partial class Circle: Shape
     {
         public int x;
         public int y;
@@ -19,22 +19,22 @@ namespace Лаба_4
             x = e.X;
             y = e.Y;
         }
-        public bool Get_select()
+        public override bool Get_select()
         {
             return selected;
         }
-        public void SetSelect(bool new_select)
+        public override void SetSelect(bool new_select)
         {
             selected = new_select;
         }
-        public void Draw_circle(PaintEventArgs e)
+        public override  void Draw_circle(PaintEventArgs e)
         {
             if (selected)
                 e.Graphics.DrawEllipse(new Pen(Brushes.Blue, 3), x - Rad, y - Rad, 100, 100);
             else
                 e.Graphics.DrawEllipse(new Pen(Brushes.Green, 3), x - Rad, y - Rad, 100, 100);
         }
-        public bool CheckIn(MouseEventArgs e)
+        public override bool CheckIn(MouseEventArgs e)
         {
             if ((x - e.X) * (x - e.X) + (y -e.Y) * (y - e.Y) <= Rad * Rad) return true;
             return false;
