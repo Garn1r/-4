@@ -12,7 +12,7 @@ namespace Лаба_4
     {
         public abstract bool Get_select();
         public abstract void SetSelect(bool new_select);
-        public abstract void Draw_circle(PaintEventArgs e);
+        public abstract void Draw(PaintEventArgs e);
         public abstract bool CheckIn(MouseEventArgs e);
     }
 }

@@ -21,10 +21,14 @@ namespace Лаба_4
 		{
 			for (int i = 0; i < st.count; ++i)
 			{
-				st.get(i).Draw_circle(e);
+				st.get(i).Draw(e);
 			}
 		}
 		bool ctrl_down;
+		private void data_KeyUp(object sender, KeyEventArgs e)
+		{
+			ctrl_down = e.Control;
+		}
 		private void data_MouseClick(object sender, MouseEventArgs e)
 		{
 			if (checkB.Checked == true)
@@ -69,11 +73,6 @@ namespace Лаба_4
 				data.Invalidate();
 			}
 		}
-		private void data_KeyUp(object sender, KeyEventArgs e)
-		{
-			ctrl_down = e.Control;
-		}
-		
 
     }
 }

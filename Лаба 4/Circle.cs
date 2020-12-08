@@ -27,7 +27,7 @@ namespace Лаба_4
         {
             selected = new_select;
         }
-        public override  void Draw_circle(PaintEventArgs e)
+        public override  void Draw(PaintEventArgs e)
         {
             if (selected)
                 e.Graphics.DrawEllipse(new Pen(Brushes.Blue, 3), x - Rad, y - Rad, 100, 100);

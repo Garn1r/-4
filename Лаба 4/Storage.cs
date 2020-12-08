@@ -35,9 +35,5 @@ namespace Лаба_4
 			}
 			count--;
 		}
-		public int numbers()
-		{
-			return count;
-		}
 	}
 }
