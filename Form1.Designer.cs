@@ -39,31 +39,32 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.panel1.Controls.Add(this.checkB);
-            this.panel1.Location = new System.Drawing.Point(220, 12);
+            this.panel1.Location = new System.Drawing.Point(2, 615);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(440, 35);
+            this.panel1.Size = new System.Drawing.Size(898, 35);
             this.panel1.TabIndex = 0;
             // 
             // checkB
             // 
             this.checkB.AutoSize = true;
-            this.checkB.Location = new System.Drawing.Point(134, 4);
+            this.checkB.Location = new System.Drawing.Point(364, 3);
             this.checkB.Name = "checkB";
-            this.checkB.Size = new System.Drawing.Size(72, 21);
+            this.checkB.Size = new System.Drawing.Size(138, 21);
             this.checkB.TabIndex = 0;
-            this.checkB.Text = "Create";
+            this.checkB.Text = "Создавать круги";
             this.checkB.UseVisualStyleBackColor = true;
             // 
             // data
             // 
             this.data.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.data.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.data.Location = new System.Drawing.Point(-12, 53);
+            this.data.Location = new System.Drawing.Point(-3, -3);
             this.data.Name = "data";
             this.data.RowHeadersWidth = 51;
             this.data.RowTemplate.Height = 24;
-            this.data.Size = new System.Drawing.Size(910, 599);
+            this.data.Size = new System.Drawing.Size(903, 615);
             this.data.TabIndex = 1;
+            this.data.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.data_CellContentClick);
             this.data.Paint += new System.Windows.Forms.PaintEventHandler(this.data_Paint);
             this.data.KeyDown += new System.Windows.Forms.KeyEventHandler(this.data_KeyDown);
             this.data.KeyUp += new System.Windows.Forms.KeyEventHandler(this.data_KeyUp);
