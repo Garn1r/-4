@@ -18,65 +18,64 @@ namespace Лаба_4
         }
 		Storage st = new Storage(100);
 		bool ctrl_down;
-		private void data_Paint(object sender, PaintEventArgs e)
-		{
-			for (int i = 0; i < st.count; i++)
-			{
-				st.get(i).Draw(e);
-			}
-		}
-		private void data_KeyUp(object sender, KeyEventArgs e)
-		{
-			ctrl_down = e.Control;
-		}
-		private void data_MouseClick(object sender, MouseEventArgs e)
-		{
-			if (checkB.Checked == true)
-			{
-				st.set(new Circle(e));
-				data.Invalidate();
-			}
-			else
+        private void dataGridView1_Paint(object sender, PaintEventArgs e)
+        {
+            for (int i = 0; i < st.count; i++)
             {
-				bool flag = false;//для того чтобы выделять один объект а не несколько
-				for(int i=st.count-1;i>=0;i--)
+               // if (i < st.count-1)
+                    st.get(i).Draw(e);
+               // else
+                   // st.get(i).Drew(e);
+            }
+        }
+        private void dataGridView1_KeyUp(object sender, KeyEventArgs e)
+        {
+            ctrl_down = e.Control;
+        }
+        private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (checkB.Checked == true)
+            {
+                st.add(new Circle(e));
+                dataGridView1.Invalidate();
+            }
+            else
+            {
+                bool flag = false;//для того чтобы выделять один объект а не несколько
+                for (int i = st.count - 1; i >= 0; i--)
                 {
-					if (ctrl_down == false)
-						st.get(i).SetSelect(false);
-					if(st.get(i).CheckIn(e)&&flag==false)
+                    if (ctrl_down == false)
+                        st.get(i).SetSelect(false);
+                    if (st.get(i).CheckIn(e) && flag == false)
                     {
-						flag = true; 
-						st.get(i).SetSelect(true);
+                        flag = true;
+                        st.get(i).SetSelect(true);
                     }
                 }
-				data.Invalidate();
+                dataGridView1.Invalidate();
             }
-		}
-		private void data_KeyDown(object sender, KeyEventArgs e)
-		{
-			ctrl_down = e.Control;
-			if (e.KeyCode.ToString() == "Delete")
-			{
-				int count= st.count;
-				int i = 0;
-				int j = 0;
-				while (i<count)
-                {
-					if(st.get(j).Get_select())
-                    {
-						st.del(j);
-						j--;
-					}
-					i++;
-					j++;
-                }
-				data.Invalidate();
-			}
-		}
+        }
 
-        private void data_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
         {
-
+            ctrl_down = e.Control;
+            if (e.KeyCode.ToString() == "Delete")
+            {
+                int count = st.count;
+                int i = 0;
+                int j = 0;
+                while (i < count)
+                {
+                    if (st.get(j).Get_select())
+                    {
+                        st.del(j);
+                        j--;
+                    }
+                    i++;
+                    j++;
+                }
+                dataGridView1.Invalidate();
+            }
         }
     }
 }
